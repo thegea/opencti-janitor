@@ -3,7 +3,7 @@ Rensar bort data äldre än x dagar från opencti community edition som inte har
 
 services:
   opencti-cleaner:
-    image: ghcr.io/ditt-användarnamn/opencti-janitor:latest
+    image: ghcr.io/thegea/opencti-janitor:latest
     container_name: opencti-cleaner
     environment:
       - OPENCTI_URL=http://opencti:4000
