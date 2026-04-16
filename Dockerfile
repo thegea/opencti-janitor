@@ -1,17 +1,16 @@
 FROM python:3.9-slim
 
-# Installera systemberoenden (libmagic är kritiskt för pycti)
+# 1. Installera systembiblioteket libmagic1
+# Vi lägger till --no-install-recommends för att hålla imagen liten
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libmagic1 && \
     rm -rf /var/lib/apt/lists/*
 
-# Installera python-bibliotek
+# 2. Installera pycti (som drar in python-magic som beroende)
 RUN pip install --no-cache-dir pycti
 
-# Kopiera in skriptet
+# 3. Resten av din setup
 COPY cleanup.py /app/cleanup.py
-
 WORKDIR /app
 
-# Kör skriptet
 CMD ["python", "cleanup.py"]
